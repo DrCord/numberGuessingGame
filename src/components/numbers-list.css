@@ -12,3 +12,12 @@
   min-width: 35px;
   padding: 3px;
 }
+.guessed {
+  font-weight: bold;
+}
+.incorrect {
+  color: red;
+}
+.correct {
+  color: green;
+}

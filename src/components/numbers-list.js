@@ -9,7 +9,7 @@ export default function NumbersList(props) {
 
     const numbersList = numbers.map((number, index) =>
         <li key={index}>
-            <button>{number+1}</button>
+            <button onClick={props.guessNumber}>{number+1}</button>
         </li>
     );
 
