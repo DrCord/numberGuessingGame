@@ -3,6 +3,7 @@ import React from 'react';
 import './numbers-list.css';
 
 export default function NumbersList(props) {
+  if(props.gameon) {
     var N = 100;
     let numbers = Array.apply(null, {length: N}).map(Number.call, Number);
 
@@ -17,4 +18,8 @@ export default function NumbersList(props) {
             {numbersList}
         </ul>
     );
+  }
+  else {
+    return null;
+  }
 }
