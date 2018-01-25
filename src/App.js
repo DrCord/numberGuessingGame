@@ -17,7 +17,7 @@ class App extends Component {
           correct: 'Correct Guess!',
           reset: 'The game has been reset, select "Start Game" to begin again.'
         },
-        currentFeedback: 'Feedback Starting Placeholder Text',
+        currentFeedback: 'Select "Start Game" to begin.',
         gameOn: false,
         hotColdThreshold: 5,
     }
@@ -33,7 +33,8 @@ class App extends Component {
     this.setGameOn(true);
     // generate random number between 1 and 100 inclusive
     this.setState({
-        magicNumber: Math.floor(Math.random() * 100) + 1
+        magicNumber: Math.floor(Math.random() * 100) + 1,
+        currentFeedback: this.state.feedbackOptions.start
     });
   }
 
@@ -62,11 +63,39 @@ class App extends Component {
     });
     if(currentGuess === this.state.magicNumber) {
       // correct guess, display feedback
+      this.setState({
+          currentFeedback: this.state.feedbackOptions.correct,
+      });
     }
     else {
       // incorrect guess
       // decide if hot or cold, display feedback
+      let hot = this.isHot(currentGuess);
+      this.setState({
+          currentFeedback: this.state.feedbackOptions.incorrect + (hot ? 'HOT - your guess was close!' : 'COLD - your guess was not very close.')
+      });
     }
+  }
+
+  isHot(guess) {
+    let hot = false;
+    if (guess > this.state.magicNumber) {
+      // guess more than magic Number - subtract threshhold and check
+      if(guess - this.state.hotColdThreshold <= this.state.magicNumber) {
+        hot = true;
+      }
+    }
+    else if(guess < this.state.magicNumber) {
+      // guess less than magic Number - add threshold and check
+      if(guess + this.state.hotColdThreshold >= this.state.magicNumber) {
+        hot = true;
+      }
+    }
+    else {
+      // magicNumber matches guess
+      hot = true;
+    }
+    return hot;
   }
 
   render() {
