@@ -8,7 +8,7 @@ export default function NumbersList(props) {
     let numbers = Array.apply(null, {length: N}).map(Number.call, Number);
 
     const numbersList = numbers.map((number, index) =>
-        <li key={index+1}>
+        <li key={index}>
             <button>{number+1}</button>
         </li>
     );

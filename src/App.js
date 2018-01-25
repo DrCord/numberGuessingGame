@@ -11,13 +11,14 @@ class App extends Component {
         magicNumber: null,
         userGuesses: [],
         currentGuess: null,
-        feedbackOptions: [{
+        feedbackOptions: {
           start: 'A random number from 1-100 has been selected to start the game. Try to guess it!',
-          incorrect: '',
-          correct: '',
-        }],
-        currentFeedback: '',
+          incorrect: 'Incorrect Guess, try again.',
+          correct: 'Correct Guess!',
+        },
+        currentFeedback: 'Feedback Starting Placeholder Text',
         gameOn: false,
+        hotColdThreshold: 5,
     }
   }
 
@@ -25,6 +26,12 @@ class App extends Component {
     this.setState({
         gameOn: state
     });
+  }
+
+  startGame() {
+    this.setGameOn(true);
+    // generate random number between 1 and 100 inclusive
+    this.state.magicNumber = Math.floor(Math.random() * 100) + 1;
   }
 
   render() {
@@ -37,10 +44,10 @@ class App extends Component {
           Click the start button to begin. The app will randomly select a number from 1-100 (inclusive) and you will attempt to guess it. The app will let you know if your guess is close to the correct number(HOT) or far away from the correct number (COLD).
         </p>
         <div className="App-actions">
-          <Actions gameOn={this.state.gameOn} startGame={() => this.setGameOn(true)} />
+          <Actions gameOn={this.state.gameOn} startGame={() => this.startGame()} />
         </div>
         <div className="App-feedback">
-            <Feedback />
+            <Feedback currentFeedback={this.state.currentFeedback} />
         </div>
         <div className="App-body">
           <NumbersList gameOn={this.state.gameOn} />
