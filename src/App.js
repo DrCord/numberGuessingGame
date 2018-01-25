@@ -20,6 +20,7 @@ class App extends Component {
         currentFeedback: 'Select "Start Game" to begin.',
         gameOn: false,
         hotColdThreshold: 5,
+        gameEnded: false,
     }
   }
 
@@ -45,6 +46,7 @@ class App extends Component {
         userGuesses: [],
         currentGuess: null,
         currentFeedback: this.state.feedbackOptions.reset,
+        gameEnded: false
     });
     // TODO - anything else?
   }
@@ -65,6 +67,7 @@ class App extends Component {
       // correct guess, display feedback
       this.setState({
           currentFeedback: this.state.feedbackOptions.correct,
+          gameEnded: true
       });
     }
     else {
@@ -122,6 +125,7 @@ class App extends Component {
         <div className="App-body">
           <NumbersList
             gameOn={this.state.gameOn}
+            gameEnded={this.state.gameEnded}
             guessNumber={(e) => this.guessNumber(e)}
             userGuesses={this.state.userGuesses}
             magicNumber={this.state.magicNumber}

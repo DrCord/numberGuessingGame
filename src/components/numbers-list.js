@@ -11,7 +11,7 @@ export default function NumbersList(props) {
         // index and number should always be the same
         let classes = '';
         let currentNumber = number+1;
-        let disabled = false;
+        let disabled = props.gameEnded ? true : false;
 
         if(props.userGuesses.includes(currentNumber)) {
           disabled = true;
@@ -24,7 +24,7 @@ export default function NumbersList(props) {
             classes += ' incorrect';
           }
         }
-        
+
         return (
           <li key={index}>
               <button disabled={disabled} className={classes} id={'number' + (currentNumber)} onClick={props.guessNumber}>{currentNumber}</button>

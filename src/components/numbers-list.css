@@ -16,8 +16,12 @@
   font-weight: bold;
 }
 .incorrect {
-  color: red;
+  background-color: rgba(255, 0, 0, 0.5);
+  border-color: rgb(255, 0, 0);
+  color: white;
 }
 .correct {
-  color: green;
+  background-color: rgba(0, 255, 0, 0.5);
+  border-color: rgb(0, 255, 0);
+  color: black;
 }
