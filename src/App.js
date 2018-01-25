@@ -15,6 +15,7 @@ class App extends Component {
           start: 'A random number from 1-100 has been selected to start the game. Try to guess it!',
           incorrect: 'Incorrect Guess, try again.',
           correct: 'Correct Guess!',
+          reset: 'The game has been reset, select "Start Game" to begin again.'
         },
         currentFeedback: 'Feedback Starting Placeholder Text',
         gameOn: false,
@@ -38,11 +39,34 @@ class App extends Component {
 
   resetGame() {
     this.setGameOn(false);
+    this.setState({
+        magicNumber: null,
+        userGuesses: [],
+        currentGuess: null,
+        currentFeedback: this.state.feedbackOptions.reset,
+    });
     // TODO - anything else?
   }
 
   guessNumber(event) {
-    console.log(event);
+    console.log(event.target.id);
+    let targetId = event.target.id;
+    let currentGuess = parseInt(targetId.replace('number', ''));
+    this.setState({
+        currentGuess: currentGuess
+    });
+    let userGuesses = this.state.userGuesses;
+    userGuesses.push(currentGuess);
+    this.setState({
+        userGuesses: userGuesses
+    });
+    if(currentGuess === this.state.magicNumber) {
+      // correct guess, display feedback
+    }
+    else {
+      // incorrect guess
+      // decide if hot or cold, display feedback
+    }
   }
 
   render() {
@@ -70,6 +94,8 @@ class App extends Component {
           <NumbersList
             gameOn={this.state.gameOn}
             guessNumber={(e) => this.guessNumber(e)}
+            userGuesses={this.state.userGuesses}
+            magicNumber={this.state.magicNumber}
           />
         </div>
       </div>

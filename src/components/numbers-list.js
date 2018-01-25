@@ -7,10 +7,30 @@ export default function NumbersList(props) {
     var N = 100;
     let numbers = Array.apply(null, {length: N}).map(Number.call, Number);
 
-    const numbersList = numbers.map((number, index) =>
-        <li key={index}>
-            <button onClick={props.guessNumber}>{number+1}</button>
-        </li>
+    const numbersList = numbers.map((number, index) => {
+        // index and number should always be the same
+        let classes = '';
+        let currentNumber = number+1;
+        let disabled = false;
+
+        if(props.userGuesses.includes(currentNumber)) {
+          disabled = true;
+          classes += 'guessed';
+
+          if(currentNumber === props.magicNumber) {
+            classes += ' correct';
+          }
+          else {
+            classes += ' incorrect';
+          }
+        }
+        
+        return (
+          <li key={index}>
+              <button disabled={disabled} className={classes} id={'number' + (currentNumber)} onClick={props.guessNumber}>{currentNumber}</button>
+          </li>
+        )
+      }
     );
 
     return (
