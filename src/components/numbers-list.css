@@ -1,0 +1,14 @@
+.numbersList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+.numbersList li {
+  margin: 8px 0;
+  width: 4%;
+}
+.numbersList li button{
+  min-width: 35px;
+  padding: 3px;
+}
